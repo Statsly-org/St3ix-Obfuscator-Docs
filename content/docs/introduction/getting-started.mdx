@@ -1,0 +1,53 @@
+---
+title: Getting Started
+description: First steps with St3ix Obfuscator
+---
+
+# Getting Started
+
+## Building
+
+```bash
+./gradlew dist
+```
+
+This creates under `build/dist/`:
+
+- `st3ix-obfuscator-v{VERSION}.jar` – the obfuscator JAR
+- `run.bat` – launch script for the GUI
+- `config.yml.example` – config template
+- `Images/` folder
+
+## Obfuscating a JAR (CLI)
+
+```bash
+java -jar build/dist/st3ix-obfuscator-v*.jar -i myapp.jar -o myapp-obfuscated.jar
+```
+
+Output goes to `build/dist/Obfuscate/myapp-obfuscated.jar`.
+
+## Obfuscating a JAR (GUI)
+
+On Windows:
+
+1. Run `run.bat` in the `build/dist/` folder (or double-click the JAR)
+2. Select input JAR
+3. Enter output filename
+4. Optional: set config path
+5. Start
+
+<Callout type="info" title="Configuration">
+Copy `config.yml.example` to `config.yml` and place it next to the obfuscator JAR. See [Configuration](/docs/configuration) for all options.
+</Callout>
+
+## Example Project
+
+The example project under `Example/Java Project` has an `obfuscate` Gradle task:
+
+```bash
+cd "Example/Java Project"
+./gradlew obfuscate
+java -jar ../../build/dist/Obfuscate/example-java-project-obfuscated.jar
+```
+
+Alternatively, run `test-obfuscate.bat` from the project root for a full build and obfuscation test.

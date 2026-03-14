@@ -1,0 +1,7 @@
+{
+  "title": "Features",
+  "description": "Obfuscation capabilities",
+  "icon": "Shield",
+  "root": true,
+  "pages": ["index"]
+}

@@ -1,0 +1,74 @@
+---
+title: Features
+description: Implemented obfuscation features
+---
+
+# Features
+
+Only documented features are implemented and functional.
+
+## Name Obfuscation
+
+### Class Renaming
+
+Classes get short or random names (e.g. `a`, `b`, `c` or `xk9m2p`). Length configurable (1–32 characters).
+
+### Method Renaming
+
+Method names are obfuscated. **Not renamed:**
+
+- `main(String[])`
+- Constructors (`<init>`, `<clinit>`)
+- Native methods
+- Enum methods (`valueOf`, `values`)
+- `toString()`, `equals(Object)`, `hashCode()` – for JDK compatibility
+
+Override chains are detected; overridden methods get the same new name.
+
+### Field Renaming
+
+Field names are obfuscated. **Not renamed:** `serialVersionUID`, enum constants.
+
+<Callout type="info" title="Homoglyph and Invisible Characters">
+- **Homoglyph:** Unicode lookalikes (e.g. Cyrillic `а` instead of Latin `a`) – copy-paste fails
+- **Invisible characters:** Zero-width chars in names – safe for JVM, hard to detect
+</Callout>
+
+## Data Obfuscation
+
+### Number Obfuscation
+
+- **int:** Math expressions (e.g. `123` → `(50*3)-27`); decompilers show the expression, not the literal
+- **long, float, double:** XOR
+
+### Array Obfuscation
+
+Array dimensions are hidden via XOR (`new int[8]` → `new int[(8 ^ key) ^ key]`).
+
+### Boolean Obfuscation
+
+`true` and `false` are hidden via XOR (`(value ^ key) ^ key`).
+
+### String Obfuscation
+
+- **XOR encryption**
+- Inline decryption at each use site (no central decoder)
+- Key per class and per string/field
+- **Static `final String` fields:** `ConstantValue` is removed; initialization happens in `<clinit>` with obfuscated code – API keys and secrets never appear readable in bytecode or to `strings`-style tools
+
+## Debug Info Stripping
+
+Removes file names, line numbers, and local variable names. Decompilers show e.g. `var0`, `var1` instead of meaningful names.
+
+## Exclude Patterns
+
+Classes/packages can be excluded from renaming:
+
+- `*` excludes all classes
+- Prefix match (e.g. `com.example` excludes `com.example.*`)
+- Built-in: `java.*`, `javax.*`, Bukkit, Minecraft, etc.
+
+## Random Options
+
+- `classNamesRandom`, `methodNamesRandom`, `fieldNamesRandom` – random names per build
+- `numberKeyRandom`, `arrayKeyRandom`, `booleanKeyRandom`, `stringKeyRandom` – random keys per build

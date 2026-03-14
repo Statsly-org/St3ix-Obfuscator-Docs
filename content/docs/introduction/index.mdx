@@ -1,0 +1,42 @@
+---
+title: St3ix Obfuscator
+description: Java bytecode obfuscator for JAR files
+---
+
+# St3ix Obfuscator
+
+A Java bytecode obfuscator that transforms JAR files to make reverse engineering harder. Class names, numeric constants, booleans, strings, and array dimensions are obfuscated while preserving runtime behavior.
+
+## Requirements
+
+- **Java 17** or later
+- **Gradle** (wrapper included)
+
+## Quick Start
+
+```bash
+# Build the obfuscator (JAR + scripts)
+./gradlew dist    # → build/dist/
+
+# Obfuscate a JAR (output in build/dist/Obfuscate/)
+java -jar build/dist/st3ix-obfuscator-v*.jar -i myapp.jar -o myapp-obfuscated.jar
+
+# Run the result
+java -jar build/dist/Obfuscate/myapp-obfuscated.jar
+```
+
+**Windows:** Use `gradlew.bat` for building. For the GUI: run `run.bat` from `build/dist/` or double-click the JAR.
+
+## Features
+
+<Cards>
+  <Card title="Class renaming" description="Short or random names, configurable length" href="/docs/features" />
+  <Card title="Method & field renaming" description="Excludes main, constructors, toString, equals, hashCode" href="/docs/features" />
+  <Card title="String obfuscation" description="XOR encryption; static final String in &lt;clinit&gt;" href="/docs/features" />
+  <Card title="Number obfuscation" description="int via math expressions; long/float/double via XOR" href="/docs/features" />
+  <Card title="Configuration" description="config.yml next to the JAR" href="/docs/configuration" />
+</Cards>
+
+## Output
+
+Obfuscated files are saved to the `Obfuscate/` folder in the obfuscator JAR directory. Existing files with the same name are overwritten.

@@ -1,0 +1,9 @@
+@import 'tailwindcss';
+@import 'fumadocs-ui/css/neutral.css';
+@import 'fumadocs-ui/css/preset.css';
+
+/* Slight purple accent on dark – mostly gray/white */
+.dark {
+  --color-fd-primary: hsl(250, 50%, 65%);
+  --color-fd-ring: hsl(250, 40%, 55%);
+}

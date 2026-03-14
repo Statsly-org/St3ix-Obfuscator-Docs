@@ -1,0 +1,68 @@
+---
+title: Configuration
+description: config.yml options
+---
+
+# Configuration
+
+The `config.yml` file must be placed next to the obfuscator JAR. Copy `config.yml.example` to `config.yml`.
+
+## Feature Toggles
+
+| Option | Default | Description |
+|--------|---------|-------------|
+| `classRenamingEnabled` | `true` | Rename classes |
+| `methodRenamingEnabled` | `true` | Rename methods |
+| `fieldRenamingEnabled` | `true` | Rename fields |
+| `numberObfuscationEnabled` | `true` | Obfuscate numbers |
+| `arrayObfuscationEnabled` | `true` | Obfuscate array dimensions |
+| `booleanObfuscationEnabled` | `true` | Obfuscate booleans |
+| `stringObfuscationEnabled` | `true` | Obfuscate strings |
+| `debugInfoStrippingEnabled` | `true` | Strip debug info |
+
+## Class Names
+
+| Option | Default | Description |
+|--------|---------|-------------|
+| `classNamesRandom` | `false` | `true` = random names per build |
+| `classNameLength` | `6` | Minimum length (1–32) |
+| `classNamesHomoglyph` | `false` | Cyrillic lookalikes |
+| `classNamesInvisibleChars` | `false` | Zero-width chars |
+
+## Method Names
+
+| Option | Default | Description |
+|--------|---------|-------------|
+| `methodNamesRandom` | `false` | Random method names |
+| `methodNameLength` | `4` | Minimum length (1–32) |
+| `methodNamesHomoglyph` | `false` | Lookalike chars |
+| `methodNamesInvisibleChars` | `false` | Zero-width chars |
+
+## Field Names
+
+| Option | Default | Description |
+|--------|---------|-------------|
+| `fieldNamesRandom` | `false` | Random field names |
+| `fieldNameLength` | `4` | Minimum length (1–32) |
+| `fieldNamesHomoglyph` | `false` | Lookalike chars |
+| `fieldNamesInvisibleChars` | `false` | Zero-width chars |
+
+## Obfuscation Keys
+
+| Option | Default | Description |
+|--------|---------|-------------|
+| `numberKeyRandom` | `false` | Random key pattern per value |
+| `arrayKeyRandom` | `false` | Random key per build |
+| `booleanKeyRandom` | `false` | Random key per build |
+| `stringKeyRandom` | `false` | Random key per build |
+
+## Excludes
+
+```yaml
+excludeClasses:
+  - com.myapp.sensitive
+  - org.example.api
+```
+
+- `*` excludes all classes
+- Prefix: `com.example` excludes `com.example.*`
