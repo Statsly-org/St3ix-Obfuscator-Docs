@@ -6,18 +6,15 @@ WORKDIR /app
 # Copy package files
 COPY package.json package-lock.json* pnpm-lock.yaml* yarn.lock* ./
 
-# Install dependencies (use npm if no lockfile)
 RUN corepack enable pnpm 2>/dev/null || true && \
-    if [ -f pnpm-lock.yaml ]; then pnpm install --frozen-lockfile; \
-    elif [ -f yarn.lock ]; then yarn install --frozen-lockfile; \
-    else npm ci || npm install; fi
+    if [ -f pnpm-lock.yaml ]; then pnpm install --frozen-lockfile --ignore-scripts; \
+    elif [ -f yarn.lock ]; then yarn install --frozen-lockfile --ignore-scripts; \
+    else npm ci --ignore-scripts || npm install --ignore-scripts; fi
 
-# Copy source
 COPY . .
 
-# Build
 ENV NEXT_TELEMETRY_DISABLED=1
-RUN npm run build
+RUN npx fumadocs-mdx && npm run build
 
 # Production stage
 FROM node:22-alpine AS runner
