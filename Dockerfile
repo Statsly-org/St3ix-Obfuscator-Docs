@@ -13,6 +13,9 @@ RUN corepack enable pnpm 2>/dev/null || true && \
 
 COPY . .
 
+# Ensure public dir exists (Next.js needs it; project may not have one)
+RUN mkdir -p /app/public
+
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN npx fumadocs-mdx && npm run build
 
