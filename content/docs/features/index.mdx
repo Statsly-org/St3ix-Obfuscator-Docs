@@ -56,6 +56,10 @@ Array dimensions are hidden via XOR (`new int[8]` → `new int[(8 ^ key) ^ key]`
 - Key per class and per string/field
 - **Static `final String` fields:** `ConstantValue` is removed; initialization happens in `<clinit>` with obfuscated code – API keys and secrets never appear readable in bytecode or to `strings`-style tools
 
+### Flow Obfuscation
+
+Linear methods are flattened into a switch-dispatcher pattern. The original execution order is obscured: decompilers show a state machine (switch over opaque keys) instead of straightforward sequential code. Control flow becomes harder to follow for reverse engineering.
+
 ## Debug Info Stripping
 
 Removes file names, line numbers, and local variable names. Decompilers show e.g. `var0`, `var1` instead of meaningful names.
@@ -71,4 +75,4 @@ Classes/packages can be excluded from renaming:
 ## Random Options
 
 - `classNamesRandom`, `methodNamesRandom`, `fieldNamesRandom` – random names per build
-- `numberKeyRandom`, `arrayKeyRandom`, `booleanKeyRandom`, `stringKeyRandom` – random keys per build
+- `numberKeyRandom`, `arrayKeyRandom`, `booleanKeyRandom`, `stringKeyRandom`, `flowKeyRandom` – random keys per build

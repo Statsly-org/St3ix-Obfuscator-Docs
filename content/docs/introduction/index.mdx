@@ -5,7 +5,7 @@ description: Java bytecode obfuscator for JAR files
 
 # St3ix Obfuscator
 
-A Java bytecode obfuscator that transforms JAR files to make reverse engineering harder. Class names, numeric constants, booleans, strings, and array dimensions are obfuscated while preserving runtime behavior.
+A Java bytecode obfuscator that transforms JAR files to make reverse engineering harder. Class names, numeric constants, booleans, strings, array dimensions, and control flow are obfuscated while preserving runtime behavior.
 
 ## Requirements
 
@@ -33,6 +33,7 @@ java -jar build/dist/Obfuscate/myapp-obfuscated.jar
   <Card title="Class renaming" description="Short or random names, configurable length" href="/docs/features" />
   <Card title="Method & field renaming" description="Excludes main, constructors, toString, equals, hashCode" href="/docs/features" />
   <Card title="String obfuscation" description="XOR encryption; static final String in &lt;clinit&gt;" href="/docs/features" />
+  <Card title="Flow obfuscation" description="Linear methods flattened into switch-dispatcher" href="/docs/features" />
   <Card title="Number obfuscation" description="int via math expressions; long/float/double via XOR" href="/docs/features" />
   <Card title="Configuration" description="config.yml next to the JAR" href="/docs/configuration" />
 </Cards>
